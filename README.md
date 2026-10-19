@@ -7,7 +7,7 @@ Two plugins for DeepSeek Harness Desktop 0.2.1-rc.2:
 
 ## Install
 
-Ready-to-install archives are in `packages/`. Install Beautify through Harness Plugin Manager. Codex needs both packages and the profile composition described in [Codex setup](codex-toolkit/README.md). Preserve your existing Account configuration. These forks are version-specific; check compatibility before upgrading Harness.
+Build and pack locally using the commands below, then install the resulting archives through Harness Plugin Manager. Release archives are not committed. Codex needs both packages and the profile composition described in [Codex setup](codex-toolkit/README.md). Preserve your existing Account configuration. These forks are version-specific; check compatibility before upgrading Harness.
 
 No profiles, credentials, personal backups or extracted reference dumps are included.
 
