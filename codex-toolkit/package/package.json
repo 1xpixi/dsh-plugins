@@ -1,0 +1,54 @@
+{
+  "name": "@local/dsh-client-ui-settings-models-auth",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Sign in with ChatGPT, monitor Codex usage limits, and choose which models appear in the picker.",
+  "icon": "./icon.svg",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon.svg": "./icon.svg"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "platform": "web"
+    }
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/schemastery": "~3.18.5"
+  },
+  "dependencies": {
+    "@earendil-works/pi-ai": "1.1.0"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "codex",
+    "openai",
+    "chatgpt",
+    "usage"
+  ],
+  "files": [
+    "lib",
+    "locale",
+    "cordis.patch.yml",
+    "icon.svg",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "license": "MIT"
+}

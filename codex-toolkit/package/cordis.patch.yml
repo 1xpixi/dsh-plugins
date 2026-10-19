@@ -1,0 +1,6 @@
+- id: ui-settings-models
+  name: '@deepseek-ai/dsh-client-ui-settings-models'
+  disabled: true
+- insert:
+    - id: ui-settings-models-auth
+      name: '@local/dsh-client-ui-settings-models-auth'

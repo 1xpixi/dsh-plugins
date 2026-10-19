@@ -1,0 +1,48 @@
+{
+  "name": "@local/dsh-client-ui-settings-account-codex",
+  "description": "DeepSeek Account settings with Codex usage limits.",
+  "version": "1.0.3",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json",
+    "./icon.svg": "./icon.svg"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-chat",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-theme"
+      ],
+      "platform": "web"
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/client.js",
+    "locale/*.json",
+    "LICENSE",
+    "README.md",
+    "cordis.patch.yml",
+    "icon.svg"
+  ],
+  "dependencies": {
+    "@deepseek-ai/schemastery": "~3.18.5"
+  },
+  "private": true,
+  "icon": "./icon.svg"
+}

@@ -1,0 +1,528 @@
+/* dsh-beautify: source-verified rc.2 hooks; recheck after UI upgrades. */
+html[data-dsh-beautify] {
+	--beautify-accent: var(--dsw-static-blue-450, #4d93f8);
+	--beautify-focus: var(--dsw-focus-ring-color, var(--beautify-accent));
+}
+
+/* Full-panel dither beneath blank and active conversations, with no tile repetition. */
+html[data-dsh-beautify] [data-phase]:is([data-phase="hero"], [data-phase="active"]) {
+	background-image:
+		linear-gradient(to bottom, var(--dsw-alias-bg-base) 0%, color-mix(in srgb, var(--dsw-alias-bg-base) 55%, transparent) 42%, transparent 100%),
+		url("__BEAUTIFY_DITHER_BACKGROUND__"),
+		radial-gradient(ellipse at 18% 12%, color-mix(in srgb, var(--beautify-accent) 18%, transparent), transparent 44%),
+		radial-gradient(ellipse at 88% 78%, color-mix(in srgb, var(--beautify-accent) 12%, transparent), transparent 42%);
+	background-size: 100% 220px, 110% 110%, 100% 100%, 100% 100%;
+	background-repeat: no-repeat;
+	background-position: 0 0, center, center, center;
+	animation: beautify-dither-shimmer 14s ease-in-out infinite alternate;
+}
+
+@keyframes beautify-dither-shimmer {
+	from { background-position: 0 0, 35% 40%, center, center; }
+	to { background-position: 0 0, 65% 60%, center, center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html[data-dsh-beautify] [data-phase]:is([data-phase="hero"], [data-phase="active"]) {
+		animation: none;
+	}
+}
+
+html[data-dsh-beautify] .Hqq-bq_previewBadge {
+	align-self: center;
+	margin-top: 0;
+}
+
+/* Let the canvas continue under the sticky active-chat composer. */
+html[data-dsh-beautify] [data-phase="active"] [data-conversation-region="composer"] {
+	background: linear-gradient(180deg, transparent 0, color-mix(in srgb, var(--dsw-alias-bg-base) 20%, transparent) 60px, color-mix(in srgb, var(--dsw-alias-bg-base) 48%, transparent) 145px, color-mix(in srgb, var(--dsw-alias-bg-base) 70%, transparent) 240px);
+}
+
+/* Keep expanded Think headers transparent like the surrounding tool-call surface. */
+html[data-dsh-beautify] [data-variant="think"][data-expanded] [data-open] [data-disclosure-header] {
+	background: transparent;
+}
+
+/* Sidebar account launcher */
+button[aria-haspopup="menu"][data-collapsed="false"][data-signed-out="false"] {
+	position: relative;
+	box-sizing: border-box;
+	height: 36px;
+	padding: 5px 8px;
+	gap: 9px;
+	border-radius: 9px;
+	background: transparent;
+	transition: background-color 160ms ease;
+}
+
+button[aria-haspopup="menu"][data-collapsed="false"][data-signed-out="false"]::before {
+	content: "";
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	top: -6px;
+	height: 1px;
+	background: color-mix(in srgb, currentColor 9%, transparent);
+}
+
+button[aria-haspopup="menu"][data-collapsed="false"][data-signed-out="false"]:hover {
+	background: color-mix(in srgb, currentColor 5%, transparent);
+}
+
+button[aria-haspopup="menu"][data-collapsed="false"][data-signed-out="false"]::after {
+	content: "";
+	width: 6px;
+	height: 6px;
+	margin-left: auto;
+	border-right: 1.5px solid var(--dsw-alias-label-tertiary);
+	border-bottom: 1.5px solid var(--dsw-alias-label-tertiary);
+	transform: rotate(45deg) translateY(-1px);
+	opacity: 0.7;
+}
+
+button[aria-haspopup="menu"][data-collapsed] > span:first-child {
+	position: relative;
+	width: 24px;
+	height: 24px;
+	color: var(--dsw-alias-label-secondary);
+	background: color-mix(in srgb, var(--beautify-accent) 12%, var(--dsw-alias-bg-skeleton));
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--beautify-accent) 26%, transparent);
+	border-radius: 50%;
+	corner-shape: round;
+}
+
+button[aria-haspopup="menu"][data-collapsed] > span:first-child svg {
+	width: 15px;
+	height: 15px;
+}
+
+button[aria-haspopup="menu"][data-collapsed] > span:first-child::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: #4ecb8f;
+	border: 1.5px solid var(--dsw-alias-bg-base);
+}
+
+button[aria-haspopup="menu"][data-collapsed="false"][data-signed-out="false"] > span:last-child:not(:only-child) {
+	font-size: 12px;
+	font-weight: 400;
+	color: var(--dsw-alias-label-tertiary);
+	transition: color 160ms ease;
+}
+
+button[aria-haspopup="menu"][data-collapsed="false"][data-signed-out="false"]:hover > span:last-child:not(:only-child) {
+	color: var(--dsw-alias-label-secondary);
+}
+
+/* Settings account identity card */
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 0;
+	padding: 12px 16px;
+	border-color: var(--dsw-alias-settings-card-stroke);
+	background: var(--dsw-alias-settings-card-fill);
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > div:first-child {
+	gap: 12px;
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > div:first-child > span:first-child {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	color: var(--dsw-alias-label-secondary);
+	background: color-mix(in srgb, var(--beautify-accent) 10%, var(--dsw-alias-bg-skeleton));
+	box-shadow: 0 0 0 1px color-mix(in srgb, var(--beautify-accent) 26%, transparent);
+	border-radius: 50%;
+	corner-shape: round;
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > div:first-child > span:first-child svg {
+	width: 18px;
+	height: 18px;
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > div:first-child > span:first-child::after {
+	content: "";
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 9px;
+	height: 9px;
+	border-radius: 50%;
+	background: #4ecb8f;
+	border: 1.5px solid var(--dsw-alias-settings-card-fill);
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > div:first-child > div > span:first-child {
+	font-size: 14px;
+	font-weight: 600;
+	letter-spacing: -0.1px;
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > div:first-child > div > span:last-child {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > a {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 4px;
+	flex: none;
+	margin-top: 8px;
+	padding: 8px 6px 0 52px;
+	border: 0;
+	border-top: 1px solid color-mix(in srgb, currentColor 8%, transparent);
+	border-radius: 0;
+	color: var(--dsw-alias-label-tertiary);
+	font-size: 12px;
+	font-weight: 500;
+	text-decoration: none;
+	transition: color 160ms ease;
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > a:hover {
+	color: var(--dsw-alias-label-primary);
+}
+
+:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > a:focus-visible {
+	outline: 2px solid var(--dsw-focus-ring-color, var(--dsw-alias-state-business-primary));
+	outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	button[aria-haspopup="menu"][data-collapsed="false"][data-signed-out="false"],
+	button[aria-haspopup="menu"][data-collapsed="false"][data-signed-out="false"] > span:last-child:not(:only-child),
+	:is(section[aria-label="Account"], section[aria-label="账号与余额"]) > div:first-child:has(> a) > a,
+	[role="treeitem"],
+	[role="tab"] {
+		transition: none;
+	}
+}
+
+/* Session rows have a display:contents SlotOutlet wrapper, unlike Account rows. */
+html[data-dsh-beautify] ._list_4ub78_7[role="menu"]:is(:has(> ._viewport_4ub78_19 > ._itemWrap_4ub78_90 ._shortcut_4ub78_198), :has([data-slot="sidebar.workspaces.session.menu.item"])) {
+	width: min(var(--beautify-menu-width, 144px), calc(100vw - 16px));
+	min-width: min(var(--beautify-menu-width, 144px), calc(100vw - 16px));
+}
+
+html[data-dsh-beautify] ._list_4ub78_7[role="menu"]:has([data-slot="sidebar.workspaces.session.menu.item"]) {
+	--beautify-menu-width: 216px;
+}
+
+html[data-dsh-beautify] ._list_4ub78_7[role="menu"]:is(:has(> ._viewport_4ub78_19 > ._itemWrap_4ub78_90 ._shortcut_4ub78_198), :has([data-slot="sidebar.workspaces.session.menu.item"])) ._shortcut_4ub78_198 {
+	display: none;
+}
+
+html[data-dsh-beautify] ._list_4ub78_7[role="menu"]:is(:has(> ._viewport_4ub78_19 > ._itemWrap_4ub78_90 ._shortcut_4ub78_198), :has([data-slot="sidebar.workspaces.session.menu.item"])) ._item_4ub78_90 {
+	display: grid;
+	grid-template-columns: 14px minmax(0, 1fr) 14px;
+	text-align: center;
+}
+
+html[data-dsh-beautify] ._list_4ub78_7[role="menu"]:is(:has(> ._viewport_4ub78_19 > ._itemWrap_4ub78_90 ._shortcut_4ub78_198), :has([data-slot="sidebar.workspaces.session.menu.item"])) ._itemLabel_4ub78_190 {
+	grid-column: 2;
+}
+
+[role="menu"] [role="menuitem"][aria-disabled="true"] {
+	opacity: 0.45;
+}
+
+/* Leave destructive icons red and selected checks accented. */
+._item_4ub78_90 > ._check_4ub78_179 {
+	color: var(--beautify-accent);
+}
+
+[role="menu"] [role="separator"] {
+	height: 1px;
+	margin: 5px 8px;
+	border: 0;
+	background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+/* Radio/check menus (model and effort pickers) keep their shipped spacing and
+   12px option radius; hover and checked tint are the only additions. */
+[role="menuitemradio"],
+[role="menuitemcheckbox"] {
+	transition: background-color 120ms ease;
+}
+
+[role="menuitemradio"]:hover:not([aria-checked="true"]):not([disabled]):not([aria-disabled="true"]),
+[role="menuitemradio"]:focus-visible:not([aria-checked="true"]):not([disabled]):not([aria-disabled="true"]),
+[role="menuitemcheckbox"]:hover:not([aria-checked="true"]):not([disabled]):not([aria-disabled="true"]),
+[role="menuitemcheckbox"]:focus-visible:not([aria-checked="true"]):not([disabled]):not([aria-disabled="true"]) {
+	background: color-mix(in srgb, currentColor 7%, transparent);
+	outline: none;
+}
+
+/* Outrank shipped hover, focus and keyboard-highlight rules, regardless of load order. */
+html[data-dsh-beautify] :is([role="menuitemradio"], [role="menuitemcheckbox"])[aria-checked="true"]:not(:disabled):not([aria-disabled="true"]) {
+	background: color-mix(in srgb, var(--beautify-accent) 16%, transparent);
+}
+
+html[data-dsh-beautify] .wq12jW_option[aria-checked="true"]:not(:disabled):not([aria-disabled="true"]) > .wq12jW_check > svg {
+	color: var(--beautify-accent);
+}
+
+/* Only the model pane gets a fixed measure; effort/root panes stay native. */
+html[data-dsh-beautify] .wq12jW_menu:has(> .wq12jW_groups) {
+	box-sizing: border-box;
+	width: min(300px, calc(100vw - 24px));
+	min-width: 0;
+	max-width: calc(100vw - 24px);
+	padding: 6px;
+}
+
+/* Input owns the border on its wrapper, not on the nested searchbox. */
+html[data-dsh-beautify] .wq12jW_menu .wq12jW_searchRow {
+	margin: 2px 2px 8px;
+}
+
+html[data-dsh-beautify] .wq12jW_searchRow .wq12jW_search {
+	box-sizing: border-box;
+	min-height: 32px;
+	padding: 6px 10px;
+	border: 1px solid var(--dsw-alias-border-l2);
+	background: var(--dsw-alias-bg-layer-1);
+}
+
+html[data-dsh-beautify] .wq12jW_searchRow .wq12jW_searchWithQuery {
+	padding-inline-end: 34px;
+}
+
+html[data-dsh-beautify] .wq12jW_searchRow .wq12jW_search:focus-within {
+	border-color: color-mix(in srgb, var(--beautify-accent) 65%, transparent);
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--beautify-accent) 14%, transparent);
+}
+
+html[data-dsh-beautify] .wq12jW_searchRow .wq12jW_search input {
+	width: 100%;
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: none;
+	background: transparent;
+	box-shadow: none;
+}
+
+html[data-dsh-beautify] .wq12jW_menu > .wq12jW_groups {
+	padding: 0 4px 4px 0;
+	overflow-x: hidden;
+	scrollbar-gutter: stable;
+	scroll-padding-block: 6px;
+}
+
+html[data-dsh-beautify] .wq12jW_groups .wq12jW_modelOption {
+	gap: 8px;
+	padding-inline: 9px;
+}
+
+/* Non-sticky headings avoid orphaned provider labels during short-list scrolling. */
+html[data-dsh-beautify] .wq12jW_groups [data-menu-group-heading] {
+	position: static;
+	padding: 8px 9px 4px;
+	border-radius: 0;
+	background: transparent;
+	font-weight: 600;
+}
+
+/* Tooltips intentionally inherit the shipped styling; per-key overrides made them heavier. */
+
+/* Workspace rows only: subagent trees own a separate clickarea. Radius and the
+   hover fill already come from the shipped row rules (12px, hover background),
+   so this layer only adds the transition and leaves geometry alone. */
+:is(.hIlkoa_projectRow, .hIlkoa_sessionRow)[role="treeitem"] {
+	transition: background-color 120ms ease;
+}
+
+[role="tab"] {
+	transition: color 120ms ease;
+}
+
+[role="tab"]:hover {
+	color: var(--dsw-alias-label-primary);
+}
+
+/* Shipped semantic hooks preserve sticky headings, including data-stuck. */
+[data-menu-group] + [data-menu-group] {
+	margin-top: 8px;
+}
+
+[data-menu-group-heading] {
+	color: var(--dsw-alias-label-secondary);
+}
+
+/* Enabled Send and Stop share the accent; disabled buttons stay native. */
+html[data-dsh-beautify] .RlGAzG_primary:not(:disabled) {
+	background: var(--beautify-accent);
+}
+
+html[data-dsh-beautify] .RlGAzG_primary:not(:disabled):hover {
+	background: color-mix(in srgb, var(--beautify-accent) 90%, var(--dsw-static-neutral-1000, #000));
+}
+
+/* Composer: no change to editable text, placeholder, height, or send behavior. */
+html[data-dsh-beautify] [data-composer-card]:not(.RlGAzG_cardWorkspaceTrigger) {
+	outline: 1px solid transparent;
+	outline-offset: 0;
+	transition: outline-color 140ms ease;
+}
+
+html[data-dsh-beautify] [data-composer-card]:not(.RlGAzG_cardWorkspaceTrigger):focus-within {
+	outline-color: color-mix(in srgb, var(--beautify-focus) 60%, transparent);
+}
+
+html[data-dsh-beautify] :is(.dlU_AG_trigger, .wq12jW_trigger):not(:disabled):not([aria-busy="true"]) {
+	transition: background-color 120ms ease, color 120ms ease;
+}
+
+html[data-dsh-beautify] .dlU_AG_trigger:not(:disabled):has(.dlU_AG_chevronOpen),
+html[data-dsh-beautify] .wq12jW_trigger:not(:disabled):not([aria-busy="true"])[aria-expanded="true"] {
+	background: var(--dsw-alias-interactive-bg-hover);
+}
+
+/* Subagent popover: a single hover surface, aligned metrics, visible keyboard focus.
+   Radius stays on the shipped --dsw-radius-lg surface. */
+html[data-dsh-beautify] .oXE0lW_menu {
+	width: min(360px, calc(100vw - 24px));
+	max-width: calc(100vw - 24px);
+}
+
+html[data-dsh-beautify] .oXE0lW_clickarea { gap: 8px; }
+html[data-dsh-beautify] .oXE0lW_metrics { min-width: 64px; }
+
+html[data-dsh-beautify] :is(.oXE0lW_row, .oXE0lW_sidebarButton):focus-visible {
+	outline: 2px solid var(--beautify-focus);
+	outline-offset: -2px;
+}
+
+/* Settings: leave selected/disabled states intact and allow narrow contents to shrink. */
+[data-shortcut-modal="settings"] :is(.wCInkW_options, .KZf9OG_section, .KZf9OG_group, .KZf9OG_card, .KZf9OG_cardMain, .KZf9OG_cardHead) {
+	min-width: 0;
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cards {
+	grid-template-columns: repeat(auto-fill, minmax(min(268px, 100%), 1fr));
+}
+
+/* Keep error borders distinct from the blue default-preset state. */
+[data-shortcut-modal="settings"] .KZf9OG_cardActive:not(.KZf9OG_cardBroken) {
+	border-color: color-mix(in srgb, var(--beautify-accent) 70%, var(--dsw-alias-settings-card-stroke));
+	background: color-mix(in srgb, var(--beautify-accent) 6%, var(--dsw-alias-bg-module-platform));
+	box-shadow: inset 3px 0 0 var(--beautify-accent);
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cardActive:not(.KZf9OG_cardBroken) [data-tone="solid"] {
+	background: color-mix(in srgb, var(--beautify-accent) 20%, var(--dsw-alias-bg-module-platform));
+	color: var(--dsw-alias-label-primary);
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cardHelp {
+	min-width: 0;
+	flex-wrap: wrap;
+}
+
+/* A consistent title/metadata block and top-aligned copy, not auto-centered descriptions. */
+[data-shortcut-modal="settings"] .KZf9OG_cardMain {
+	gap: 16px;
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cardHead {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 8px;
+	width: 100%;
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cardIdentity {
+	min-width: 0;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 8px;
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cardIdentity > [data-tone] {
+	max-width: 100%;
+	white-space: normal;
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cardId {
+	max-width: 72px;
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cardDesc {
+	display: block;
+	margin-block: 0;
+	-webkit-line-clamp: unset;
+	overflow: visible;
+}
+
+[data-shortcut-modal="settings"] .KZf9OG_cardName {
+	white-space: normal;
+	overflow-wrap: anywhere;
+}
+
+[data-shortcut-modal="settings"] :is(.v01cdW_themeCube, .KZf9OG_card, .RotMhW_card) {
+	transition: border-color 140ms ease, background-color 140ms ease;
+}
+
+@media (hover: hover) {
+	[data-shortcut-modal="settings"] :is(.PgWN5G_row, ._0Fr0Ha_row, ._3HsggG_row):hover {
+		background: color-mix(in srgb, currentColor 2.5%, transparent);
+	}
+	[data-shortcut-modal="settings"] .KZf9OG_card:not(.KZf9OG_cardActive):not(.KZf9OG_cardBroken):hover {
+		border-color: var(--dsw-alias-label-tertiary);
+	}
+}
+
+/* Chat: improve affordances without recoloring error text or revealing unavailable
+   actions. The hover fill and 8px radius are already shipped, so only the stronger
+   foreground is added here — changing the radius on hover visibly warped the button. */
+html[data-dsh-beautify] .xD_KDq_action:not(:disabled):not([aria-disabled="true"]):not([data-unavailable]):hover {
+	color: var(--dsw-alias-label-primary);
+}
+
+html[data-dsh-beautify] :is(.xD_KDq_action, .WW4l1q_title, ._4AI11G_root, .Mrat-G_thumbnail, .srf2qa_thumbnail, .haSm5q_assistantToolCallButton, .QnvEwG_action, .v01cdW_themeCube):not(:disabled):not([aria-disabled="true"]):focus-visible {
+	outline: 2px solid var(--beautify-focus);
+	outline-offset: 2px;
+}
+
+html[data-dsh-beautify] :is(.Mrat-G_thumbnail, .srf2qa_thumbnail) {
+	transition: border-color 140ms ease;
+}
+
+html[data-dsh-beautify] :is(.Mrat-G_thumbnail, .srf2qa_thumbnail):hover {
+	border-color: var(--dsw-alias-label-secondary);
+}
+
+html[data-dsh-beautify] :is(._item_4ub78_90, [role="menuitemradio"], [role="menuitemcheckbox"]):not(:disabled):not([aria-disabled="true"]):focus-visible {
+	outline: 2px solid var(--beautify-focus);
+	outline-offset: -2px;
+}
+
+/* Preserve native tooltips and loading/disabled indicators. */
+@media (prefers-reduced-motion: reduce) {
+	html[data-dsh-beautify] :is([data-composer-card], .dlU_AG_trigger, .wq12jW_trigger, .hIlkoa_projectRow, .hIlkoa_sessionRow, .Mrat-G_thumbnail, .srf2qa_thumbnail, [role="tab"], [role="menuitem"], [role="menuitemradio"], [role="menuitemcheckbox"]),
+	[data-shortcut-modal="settings"] :is(.v01cdW_themeCube, .KZf9OG_card, .RotMhW_card) {
+		transition: none !important;
+	}
+}
+
+::selection {
+	background: color-mix(in srgb, var(--beautify-accent) 30%, transparent);
+	color: var(--dsw-alias-label-primary);
+}
+

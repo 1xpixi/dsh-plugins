@@ -1,0 +1,16 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const { patchAccountClient, PACKAGE_NAME } = require('./patch-account.cjs');
+if (!process.env.DSH_ACCOUNT_SOURCE) throw new Error('Set DSH_ACCOUNT_SOURCE to the upstream Account package directory.');
+const originalPath = path.join(path.resolve(process.env.DSH_ACCOUNT_SOURCE), 'lib/client.js');
+const original = fs.readFileSync(originalPath, 'utf8');
+const patched = patchAccountClient(original);
+assert.ok(patched.includes('id: "' + PACKAGE_NAME + '"'));
+assert.equal((patched.match(/function CodexUsageCard\(/g) || []).length, 1);
+assert.ok(patched.includes('(0, react_jsx_runtime.jsx)(CodexUsageCard, {})'));
+assert.ok(patched.includes('const DESKTOP_ONBOARDING_NAMESPACE = "ui-settings-account-codex";'));
+assert.throws(() => patchAccountClient(patched), /already patched/);
+assert.throws(() => patchAccountClient(original.replace('function AccountSection(', 'function ChangedAccountSection(')), /AccountSection declaration/);
+new (require('node:vm').Script)(patched);
+console.log('PASS: Account fork patch markers, local ModuleLoader ID, JSX insertion, and syntax');
