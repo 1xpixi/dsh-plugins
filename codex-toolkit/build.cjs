@@ -54,7 +54,7 @@ fs.mkdirSync(path.join(accountOut, 'lib'), { recursive: true });
 fs.mkdirSync(path.join(accountOut, 'locale'), { recursive: true });
 const accountManifest = JSON.parse(fs.readFileSync(path.join(accountOriginal, 'package.json'), 'utf8'));
 accountManifest.name = accountPackageName;
-accountManifest.version = '1.0.3';
+accountManifest.version = '1.0.4';
 accountManifest.private = true;
 accountManifest.description = 'DeepSeek Account settings with Codex usage limits.';
 accountManifest.files = ['lib/index.js', 'lib/client.js', 'locale/*.json', 'LICENSE', 'README.md', 'cordis.patch.yml', 'icon.svg'];

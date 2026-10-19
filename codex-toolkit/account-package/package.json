@@ -1,7 +1,7 @@
 {
   "name": "@local/dsh-client-ui-settings-account-codex",
   "description": "DeepSeek Account settings with Codex usage limits.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "type": "module",
   "main": "lib/index.js",
   "exports": {

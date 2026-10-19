@@ -74,6 +74,8 @@ function harness(responder) {
   assert.ok(style.children.includes('background-size:128px 100%; background-repeat:repeat-x;'), 'texture keeps its pixel scale and repeats seamlessly');
   assert.ok(style.children.includes('codex-dither-shimmer 4.2s linear infinite'), 'dither shifts continuously to create a shimmer');
   assert.ok(style.children.includes('@keyframes codex-dither-shimmer'), 'shimmer keyframes are present');
+  assert.ok(style.children.includes('mask-image:linear-gradient(to right, transparent, #000);'), 'speckles fade from zero at the left to full strength on the right');
+  assert.ok(style.children.includes('mask-size:calc(100% - var(--codex-fill-cutoff)) 100%; mask-repeat:no-repeat; mask-position:left;'), 'speckle fade spans only the filled portion, not the empty track');
   assert.equal(connected.canvasRenders, 1, 'texture is rendered once and reused across component renders');
   assert.equal(meters[0].style['--codex-fill-cutoff'], '65%');
   assert.equal(meters[1].style['--codex-fill-cutoff'], '20%');

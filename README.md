@@ -3,7 +3,7 @@
 Two plugins for DeepSeek Harness Desktop 0.2.1-rc.2:
 
 - **Beautify 0.4.16** — blue dithered conversation background with subtle shimmer, polished menus and composer. Source and tests in `beautify/`.
-- **Codex Toolkit** — ChatGPT sign-in, model selection and usage limits with dithered bars. Models/Auth 1.0.1 and Account 1.0.3. Source, built packages and tests in `codex-toolkit/`.
+- **Codex Toolkit** — ChatGPT sign-in, model selection and usage limits with dithered bars. Models/Auth 1.0.1 and Account 1.0.4. Source, built packages and tests in `codex-toolkit/`.
 
 ## Install
 

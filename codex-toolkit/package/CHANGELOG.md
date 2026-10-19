@@ -1,5 +1,9 @@
 # Changelog
 
+## Account 1.0.4
+
+- Fade animated usage speckles from nearly absent at the left to full strength at the right of the filled portion. Keep the existing moving dither animation and reduced-motion behavior.
+
 ## 1.0.1
 
 - Match model checklist cards, checks, count and search focus to the UI blue accent, independently of Beautify.

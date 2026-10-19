@@ -29,7 +29,7 @@ For an existing installation, update the Account companion archive through Harne
 The release contains two tarballs:
 
 - `local-dsh-client-ui-settings-models-auth-1.0.1.tgz` — Models fork, Codex backend, and model selector.
-- `local-dsh-client-ui-settings-account-codex-1.0.3.tgz` — Account fork with visibly dithered, shimmering usage bars.
+- `local-dsh-client-ui-settings-account-codex-1.0.4.tgz` — Account fork with visibly dithered, shimmering usage bars.
 
 1. Copy both tarballs into your profile's `vendor/` directory, for example `~/.dsh/profiles/desktop/vendor/`.
 2. Add both packages to the profile's `package.json` dependencies:
@@ -37,7 +37,7 @@ The release contains two tarballs:
    ```json
    "dependencies": {
      "@local/dsh-client-ui-settings-models-auth": "file:./vendor/local-dsh-client-ui-settings-models-auth-1.0.1.tgz",
-     "@local/dsh-client-ui-settings-account-codex": "file:./vendor/local-dsh-client-ui-settings-account-codex-1.0.3.tgz"
+     "@local/dsh-client-ui-settings-account-codex": "file:./vendor/local-dsh-client-ui-settings-account-codex-1.0.4.tgz"
    }
    ```
 
